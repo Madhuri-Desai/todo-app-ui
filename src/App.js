@@ -1,23 +1,32 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import { Box } from '@mui/material';
+import { BrowserRouter as Router, Routes,Route } from 'react-router-dom';
+import AddTodo from './components/AddTodo';
+import TodoEdit from './components/TodoEdit';
+import Wrapper from './components/Wrapper';
 
-function App() {
+function App(){
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <Router>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100vh',
+            backgroundColor: '#e6d5f0',
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          <Routes>
+              <Route path="/" exact element={<Wrapper />} />
+              <Route path='/new' element={<AddTodo />} />
+              <Route path='/edit/:id' element={<TodoEdit />} />
+          </Routes>
+        </Box>
+      </Router>
+
     </div>
   );
 }
