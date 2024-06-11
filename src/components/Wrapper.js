@@ -10,9 +10,6 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Wrapper = () => {
-    const classes = useStyles()
-
-    const [todos, setTodos] = useState([]);
     const [completed, setCompleted] = useState(0)
     const [cancelledTasks, setCancelledTasks] = useState(0)
     const [totalTasks, setTotalTasks] = useState(0)
@@ -28,7 +25,6 @@ const Wrapper = () => {
         setTotalTasks(data.length)
         setCancelledTasks(data.filter(x => x.cancelled == true).length)
         setActiveTasks(data.filter(x=> x.status != 'Complete' && x.cancelled == false ).length)
-        setTodos(response.data);
     };
 
   return (

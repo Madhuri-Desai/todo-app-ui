@@ -3,11 +3,13 @@ import axios from 'axios';
 import { useParams, useNavigate,Link } from 'react-router-dom';
 import { TextField, Button,Container, FormControl,MenuItem,Select,InputLabel} from '@mui/material';
 import { getTodo, updateTodo } from '../services/ApiService';
+import AddReminder from './AddReminder';
 
 function TodoEdit() {
   const { id } = useParams();
   const [todo, setTodo] = useState(null);
   const navigate = useNavigate();
+  const [openReminderDialog,setOpenReminderDialog] = useState(false)
 
   useEffect(() => {
     const fetchTodo = async () => {
@@ -36,6 +38,14 @@ function TodoEdit() {
     } catch (error) {
       console.error('Error updating the todo item:', error);
     }
+  };
+
+  const handleAddReminderClick = (taskId) => {
+      setOpenReminderDialog(true);
+  };
+
+  const handleReminderDialogClose = () => {
+    setOpenReminderDialog(false);
   };
 
   if (!todo) return <div>Loading...</div>;
@@ -112,10 +122,18 @@ function TodoEdit() {
                     margin="normal"
                 />
             )}
+            <Button variant="contained" color="primary" style={{margin:20}} onClick={() =>handleAddReminderClick(id)}>
+                Add Reminder
+            </Button>
             <Button type="submit" variant="contained" color="primary">
                 Save
             </Button>
             </form>
+            <AddReminder
+              open={openReminderDialog}
+              handleClose={handleReminderDialogClose}
+              taskId={id}
+            />
         </Container>
     </div>
   );

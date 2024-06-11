@@ -9,7 +9,6 @@ const updateTodo = (id, todo) => axios.put(`${API_URL}/editTask/${id}`, todo);
 const updateTodoStatus=(id,todo) => axios.put(`${API_URL}/updateTaskStatus/${id}`,todo)
 const updateTodoCancellation=(id,todo) => axios.put(`${API_URL}/updateTaskCancellation/${id}`,todo)
 const deleteTodo = (id) => axios.delete(`${API_URL}/delete/${id}`);
-const updateReminder = (userId, reminderTime) => axios.put(`${API_URL}/users/${userId}/reminder`, { reminder_time: reminderTime });
-const createUser = (user) => axios.post(`${API_URL}/users`, user);
+const addReminder =(id,reminder) => axios.post(`${API_URL}/tasks/${id}/reminders`,reminder)
 
-export { getTodos, getTodo, createTodo, updateTodo, updateTodoStatus, updateTodoCancellation, deleteTodo, updateReminder, createUser };
+export { getTodos, getTodo, createTodo, updateTodo, updateTodoStatus, updateTodoCancellation, deleteTodo, addReminder };
