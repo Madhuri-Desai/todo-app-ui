@@ -63,7 +63,11 @@ const TodoList = () => {
             status:'Complete'
         };
         setSelectedTask(null);
-        updateTodoStatus(id, todoData).then(navigate('/'));
+        updateTodoStatus(id, todoData).then(
+            setTimeout(function() {
+                window.location.reload()
+            }, 1000)
+        )            
     }
 
     const handleMarkAsCancelled = () =>{
@@ -72,7 +76,11 @@ const TodoList = () => {
         };
         setTaskDetailsDialogOpen(false);
         setSelectedTask(null);
-        updateTodoCancellation(selectedTask.id, todoData).then(navigate('/'));
+        updateTodoCancellation(selectedTask.id, todoData).then(
+            setTimeout(function() {
+                window.location.reload()
+            }, 1000)
+            );
     }
     
     const handleDeleteDialogClose = () =>{
