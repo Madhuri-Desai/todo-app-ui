@@ -3,38 +3,11 @@ import { Link } from 'react-router-dom';
 import { getTodos, deleteTodo, updateTodoStatus,updateTodoCancellation} from '../services/ApiService';
 import { List, ListItem, ListItemText, IconButton, Button,Box,Divider,Typography ,Dialog,DialogContent} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { makeStyles } from '@mui/styles';
 import { useNavigate } from 'react-router-dom';
 import TaskDetailsDialog from './TaskDetailsDialog';
-import moment from "moment";
 import { CheckOutlined } from '@mui/icons-material';
 
-const useStyles = makeStyles((theme) => ({
-    box_style: {
-        maxHeight: "185px",
-        display: "flex",
-        flexGrow: 1,
-        flexDirection: "column",    
-        maxWidth: "100%",
-      },
-      list_root: {
-        width: "100%",
-        alignContent: "stretch",
-      },
-      color_primary: {
-        color: "black",
-        fontFamily: "Verdana, Arial, Helvetica, sans-serif",
-        textOverflow: "ellipsis",
-        maxWidth: "200px",
-        whiteSpace: "nowrap",
-        overflow: "hidden",
-        marginTop: "10px",
-      },
-}))
-
 const TodoList = () => {
-
-    const classes = useStyles();
 
     const [todos, setTodos] = useState([]);
 
@@ -57,7 +30,6 @@ const TodoList = () => {
         return quotes[Math.floor(Math.random() * quotes.length)];
     }
 
-
     useEffect(() => {
         fetchTodos();
     }, []);
@@ -70,12 +42,6 @@ const TodoList = () => {
             setTodos([])
         }        
     };
-
-    function formatDate(data) {
-        
-
-    }
-
     
     const handleDelete = async () => {
         await deleteTodo(selectedTaskId);        
@@ -161,7 +127,7 @@ const TodoList = () => {
                 }}
             >
                 { todos && todos.length ?
-                <List className={classes.list_root}>
+                <List>
                     {todos.map(todo => (
                         <div>
                             <div style={{display:'flex'}}>
@@ -170,7 +136,6 @@ const TodoList = () => {
                                 primary={<Typography
                                     sx={{ display: "inline" }}
                                     variant="body2"
-                                    className={classes.color_primary}
                                 >{todo.title}</Typography>} 
                                 secondary={todo.due_date} />
                             </ListItem>
@@ -195,7 +160,7 @@ const TodoList = () => {
                         </div>
                     ))}
                 </List> : 
-                <div className={classes.quoteStyle}>{getQuotes()} </div>
+                <div>{getQuotes()} </div>
             }
             </Box>
             <TaskDetailsDialog open={taskDetailsDialogOpen} handleClose={handleTaskDetailsDialogClose} task={selectedTask} handleMarkAsCancelled={handleMarkAsCancelled} />

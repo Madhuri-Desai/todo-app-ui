@@ -1,13 +1,7 @@
 import { Paper, Typography,Box } from '@mui/material'
 import React,{useState,useEffect} from 'react'
-import { makeStyles } from '@mui/styles'
 import { getTodos } from '../services/ApiService'
 import TodoList from './TodoList'
-
-const useStyles = makeStyles((theme) => ({
-    
-}))
-
 
 const Wrapper = () => {
     const [completed, setCompleted] = useState(0)
